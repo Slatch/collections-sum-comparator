@@ -2,10 +2,10 @@
 
 namespace Slatch\CollectionsSumComparator\Arithmetic;
 
-class Sum extends AbstractCalculator
+class Multiplication extends AbstractCalculator
 {
     protected function calculate($values)
     {
-        return array_sum($values);
+        return array_product($values);
     }
 }

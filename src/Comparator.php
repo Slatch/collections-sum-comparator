@@ -21,12 +21,12 @@ class Comparator
     /**
      * @param int|float $value
      */
-    public function compare($value, ...$arrays)
+    public function compareMultiple($value, ...$compared)
     {
         while (true) {
             // Calculate values
             $calculations = [];
-            foreach ($arrays as $values) {
+            foreach ($compared as $values) {
                 $calculations[key($values)] = current($values);
             }
             $val = $this->arithmeticService->calc($calculations);
@@ -37,35 +37,31 @@ class Comparator
             }
 
             // Move pointers
-            $iterator = count($arrays) - 1;
+            $iterator = count($compared) - 1;
             while (true) {
-                if (next($arrays[$iterator])) {
+                if (next($compared[$iterator])) {
                     break;
                 }
                 if ($iterator === 0) {
                     break 2;
                 }
-                reset($arrays[$iterator]);
+                reset($compared[$iterator]);
                 $iterator--;
             }
         }
     }
 
-    /**
-     * @param int|float $value
-     */
-    public function compare2($value, $arr1, $arr2, $arr3)
+    public function compare($value, $compare1, $compare2)
     {
         while (true) {
-            $val = $this->arithmeticService->calc(current($arr1), current($arr2), current($arr3));
+            $val = $this->arithmeticService->calcMultiple(current($compare1), current($compare2));
             if ($this->comparingService->compare($val, $value))
                 yield [
-                    key($arr1) => current($arr1),
-                    key($arr2) => current($arr2),
-                    key($arr3) => current($arr3),
+                    key($compare1) => current($compare1),
+                    key($compare2) => current($compare2),
                 ];
 
-            if (!next($arr3) && reset($arr3) && !next($arr2) && reset($arr2) && !next($arr1))
+            if (!next($compare2) && reset($compare2) && !next($compare1))
                 break;
         }
     }
