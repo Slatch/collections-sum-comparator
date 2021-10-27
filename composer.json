@@ -1,0 +1,23 @@
+{
+  "name": "slatch/collections-sum-comparator",
+  "type": "library",
+  "description": "Compare each item of each given collection with some value",
+  "keywords": ["php", "collections", "compare"],
+  "homepage": "https://leonov.xyz",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Andrii Leonov",
+      "email": "andrew@leonov.xyz"
+    }
+  ],
+  "require": {
+    "php": ">=7.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Slatch\\CollectionsSumComparator\\": "src/"
+    }
+  },
+  "minimum-stability": "stable"
+}
